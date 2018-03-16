@@ -13,7 +13,7 @@ Service Fabric Service Catalog that implements Open Service Broker API (OSB API)
 
 You can use any OSB-API compliant Service Broker. There are several implementation on Internet:
 
-* [Sample CloudFoundry servcie broker in Golang](https://github.com/cloudfoundry-samples/go_service_broker)
+* [Sample CloudFoundry service broker in Golang](https://github.com/cloudfoundry-samples/go_service_broker)
 
 * [Azure service broker in Node.js](https://github.com/Azure/meta-azure-service-broker)
 
