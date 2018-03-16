@@ -1,56 +1,55 @@
 ![Build Status](https://haishinew.visualstudio.com/_apis/public/build/definitions/5d2cf77c-570e-4b7e-9361-b2bd291db7c7/1/badge)
 
-# SFServiceCatalog
-Service Fabric Service Catalog that implements Open Service Broker API (OSB API)
+# Service Fabric Service Catalog
+Service Catalog is an add-on service to your Service Fabric cluster that allows you to provision and bind to Azure services through [Open Service Broker API](https://www.openservicebrokerapi.org/). 
 
-## Test Locally
+# Build and Deploy
 
-### Prerequisites
+## Build, configure, and deploy the service
+Clone this repository and build the **SFServiceCatalog** solution. 
 
-* Visual Studio 2017
-
-### Set up a OSB Service Broker server
-
+Modify the **appsettings.json** file under the **CatalogService** project to point to the OSB API endpoint you want to use:
+```json
+"ActorSwitches": {
+      "OSBEntityCatalogActor": {
+        "OSBEndpoint": "<OSB API endpoint>",
+        "OSBUser": "<user name>",
+        "OSBPassword": "<password>"
+      }
+},
+```
 You can use any OSB-API compliant Service Broker. There are several implementation on Internet:
 
 * [Sample CloudFoundry service broker in Golang](https://github.com/cloudfoundry-samples/go_service_broker)
 
 * [Azure service broker in Node.js](https://github.com/Azure/meta-azure-service-broker)
 
-### Test Locally
+Then, deploy the **SFServiceCatalog** application to your Service Fabric cluster. Now, you've got a Catalog Service on your cluster.
 
-1. Make sure your local Service Fabric cluster is up and running.
-2. Open the **SFServiceCatalog\SFServiceCatalog.sln** solution.	
-3. Modify **CatalogService\appsettings.json** to point to your OSB Service Broker server:
+## Build and configure client
+Service Catalog is currently managed by a sample command-line tool, **sfcat**. You can build **sfcat** by building the **sfcat** solution under *tools\sfcat* folder. Modify the **app.config** under sfcat to point sfcat to your Catalog Service endpoint:
 
-```json
-    "ActorSwitches": {
-        "OSBEntityCatalogActor": {
-        "OSBEndpoint": "http://104.45.224.242",
-        "OSBUser": "haishi",
-        "OSBPassword":"P$ssword!"
-      }
-    }
-```
-4. Open the **tools\sfcat\sfcat.sln** solution and rebuild the client.
-5. Press **F5** to launch the Catalog service. Or, you can publish the Service Fabric application to your local cluster.
-6. Open a Command line prompt and use **tools\sfcat\sfcat\bin\debug\sfcat.exe** as your client to interact with the Catalog service.
-
-The following is a list of commands that registers a new broker, gets service classes, creates a service instance and then creates a binding:
-
-```
-sfcat create broker --file sampleFiles\servicebroker.json --name 1
-
-sfcat get service-classes
-
-sfcat create service-instance --file sampleFiles\serviceinstance.json --storageAccountName <new Azure storage account name> --id <instance id>
-
-sfcat watch service-instance <instance id>
-
-sfcat create binding --file sampleFiles\binding.json --instance_id <instance id> --binding_id <binding id> --id <binding id again>
+```xml
+ <appSettings>
+    <add key="CatalogServiceEndpoint" value="http://localhost:8088"/>
+    ...
+  </appSettings>
 ```
 
->**Pro tip:** all object types have shorthand notations: _si_ for service-instance, _bd_ for binding, _sc_ for service-class, and _bk_ for broker.
+# Getting started
 
+With current version, you need to register your OSB endpoint with your Catalog Service using sfcat. We are looking at making this part of the Catalog Service configuration so that you don't have to use sfcat at all.
 
+```bash
+sfcat create broker --name <broker name of your choice> --url <OSB endpoint> --user <user name> --password <password>
+```
 
+Next, you can:
+
+* [Manage Catalog Service using **sfcat**](docs/sfcat.md)
+* [Use Catalog Service from your Service Fabric applciations](docs/programmability.md)
+
+# Known Issues
+
+1. Althoug the API supports it, you can't add multiple OSB API endpoints to the system yet.
+2. Be default there are not OSB API endpoint registered. You need to use [**sfcat**](docs/sfcat.md) to register an OSB API endpoint before you can start creating service instances. 
