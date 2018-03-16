@@ -1,0 +1,6 @@
+{
+	"name": "mock broker",
+	"url": "http://localhost:3000",
+	"user": "username",
+	"password": "password"
+}

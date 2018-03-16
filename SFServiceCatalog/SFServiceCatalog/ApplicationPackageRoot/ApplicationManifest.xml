@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="SFServiceCatalogType" ApplicationTypeVersion="1.0.1" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Parameters>
+    <Parameter Name="CatalogService_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="OSBEntityCatalogActor_PartitionCount" DefaultValue="10" />
+    <Parameter Name="OSBEntityCatalogActor_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="OSBEntityCatalogActor_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="OSBEntityActor_PartitionCount" DefaultValue="10" />
+    <Parameter Name="OSBEntityActor_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="OSBEntityActor_TargetReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ServiceBrokerActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="ServiceBrokerActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="ServiceBrokerActorService_TargetReplicaSetSize" DefaultValue="3" />
+  </Parameters>
+  <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
+       should match the Name and Version attributes of the ServiceManifest element defined in the 
+       ServiceManifest.xml file. -->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="ServiceBrokerActorPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="OSBEntityCatalogActorPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="OSBEntityActorPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="CatalogServicePkg" ServiceManifestVersion="1.0.1" />
+    <ConfigOverrides />
+  </ServiceManifestImport>
+  <DefaultServices>
+    <!-- The section below creates instances of service types, when an instance of this 
+         application type is created. You can also create one or more instances of service type using the 
+         ServiceFabric PowerShell module.
+         
+         The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
+    <Service Name="CatalogService" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="CatalogServiceType" InstanceCount="[CatalogService_InstanceCount]">
+        <SingletonPartition />
+      </StatelessService>
+    </Service>
+    <Service Name="OSBEntityCatalogActor" GeneratedIdRef="8c8c8ed9-9410-4254-816a-e83a0e6f2c64|Persisted">
+      <StatefulService ServiceTypeName="OSBEntityCatalogActorType" TargetReplicaSetSize="[OSBEntityCatalogActor_TargetReplicaSetSize]" MinReplicaSetSize="[OSBEntityCatalogActor_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[OSBEntityCatalogActor_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="OSBEntityActor" GeneratedIdRef="ac0c1a94-5e9a-44f9-9949-b0e915c4c50b|Persisted">
+      <StatefulService ServiceTypeName="OSBEntityActorType" TargetReplicaSetSize="[OSBEntityActor_TargetReplicaSetSize]" MinReplicaSetSize="[OSBEntityActor_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[OSBEntityActor_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+    <Service Name="ServiceBrokerActorService" GeneratedIdRef="9c67003c-506a-4f7c-ab2e-1879acbb1f91|Persisted">
+      <StatefulService ServiceTypeName="ServiceBrokerActorServiceType" TargetReplicaSetSize="[ServiceBrokerActorService_TargetReplicaSetSize]" MinReplicaSetSize="[ServiceBrokerActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[ServiceBrokerActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
+    </Service>
+  </DefaultServices>
+</ApplicationManifest>

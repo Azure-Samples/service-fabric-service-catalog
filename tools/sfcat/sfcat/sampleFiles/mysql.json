@@ -1,0 +1,10 @@
+{
+  "service_id": "997b8372-8dac-40ac-ae65-758b4a5075a5",
+  "plan_id": "427559f1-bf2a-45d3-8844-32374a3e58aa",
+  "parameters": {
+    "resourceGroup": "osb-test-group",
+    "storageAccountName": "wmll118",
+    "location": "eastus",
+    "accountType": "Standard_LRS"
+  }
+}

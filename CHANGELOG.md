@@ -1,13 +1,8 @@
-## [project-title] Changelog
+## Service Fabric Service Catalog Change Log
 
-<a name="x.y.z"></a>
-# x.y.z (yyyy-mm-dd)
+<a name="0.8.8"></a>
+# 0.8.0 (2018-03-15)
 
 *Features*
-* ...
 
-*Bug Fixes*
-* ...
-
-*Breaking Changes*
-* ...
+* Works with standard OSB API implementations

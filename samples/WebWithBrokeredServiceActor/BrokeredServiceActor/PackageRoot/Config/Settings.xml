@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Section Name="BrokeredServiceActorServiceReplicatorConfig">
+    <Parameter Name="ReplicatorEndpoint" Value="BrokeredServiceActorServiceReplicatorEndpoint" />
+    <Parameter Name="BatchAcknowledgementInterval" Value="0.005" />
+  </Section>
+  <Section Name="BrokeredServiceActorServiceReplicatorSecurityConfig">
+    <Parameter Name="CredentialType" Value="None" />
+  </Section>
+  <Section Name="BrokerConfiguration">
+    <Parameter Name="ServiceType" Value="2e2fc314-37b6-4587-8127-8f9ee8b33fea" />
+    <Parameter Name="ServicePlan" Value="6ddf6b41-fb60-4b70-af99-8ecc4896b3cf" />
+    <Parameter Name="UseCSService" Value="true" />
+    <Parameter Name="CSEndpoint" Value="http://archibot.southcentralus.cloudapp.azure.com:8088" />
+    <Parameter Name="BrokerPolicy" Value="ProvisionAndBind" />
+    <!-- To directly connect to an OSB endpoint, set UseCSService to false -->
+    <!-- Other values: BindOnly -->
+    <Parameter Name="OSBEndpoint" Value="http://104.45.224.242" />
+    <Parameter Name="OSBUser" Value="haishi" />
+    <Parameter Name="OSBPassword" Value="P$ssword!" />
+  </Section>
+  <!-- The content will be generated during build -->
+</Settings>
