@@ -35,7 +35,7 @@ Service Catalog is currently managed by a sample command-line tool, **sfcat**. Y
     ...
   </appSettings>
 ```
-
+![sfcat](docs/sfcat.png)
 # Getting started
 
 With current version, you need to register your OSB endpoint with your Catalog Service using sfcat. We are looking at making this part of the Catalog Service configuration so that you don't have to use sfcat at all.
