@@ -1,5 +1,6 @@
 ---
-languages: []
+languages:
+- csharp
 products:
 - azure
 topic: sample
