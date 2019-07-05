@@ -4,6 +4,7 @@ languages:
 products:
 - azure
 topic: sample
+description: "An add-on service to your Service Fabric cluster that allows you to provision and bind to Azure services through Open Service Broker API."
 ---
 
 ![Build Status](https://haishinew.visualstudio.com/_apis/public/build/definitions/5d2cf77c-570e-4b7e-9361-b2bd291db7c7/1/badge)
