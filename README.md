@@ -1,3 +1,10 @@
+---
+languages: []
+products:
+- azure
+topic: sample
+---
+
 ![Build Status](https://haishinew.visualstudio.com/_apis/public/build/definitions/5d2cf77c-570e-4b7e-9361-b2bd291db7c7/1/badge)
 
 # Service Fabric Service Catalog
@@ -52,4 +59,4 @@ Next, you can:
 # Known Issues
 
 1. Althoug the API supports it, you can't add multiple OSB API endpoints to the system yet.
-2. Be default there are not OSB API endpoint registered. You need to use [**sfcat**](docs/sfcat.md) to register an OSB API endpoint before you can start creating service instances. 
+2. Be default there are not OSB API endpoint registered. You need to use [**sfcat**](docs/sfcat.md) to register an OSB API endpoint before you can start creating service instances.
