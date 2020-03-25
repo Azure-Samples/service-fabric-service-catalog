@@ -3,6 +3,7 @@ languages:
 - csharp
 products:
 - azure
+- azure-service-fabric
 page_type: sample
 description: "An add-on service to your Service Fabric cluster that allows you to provision and bind to Azure services through Open Service Broker API."
 ---
